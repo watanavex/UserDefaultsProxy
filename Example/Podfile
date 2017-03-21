@@ -1,0 +1,6 @@
+use_frameworks!
+target 'UserDefaultsProxy_Tests' do
+  pod 'UserDefaultsProxy', :path => '../'
+  
+  
+end
