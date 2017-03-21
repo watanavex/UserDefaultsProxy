@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'UserDefaultsProxy'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of UserDefaultsProxy.'
+  s.summary          = 'UserDefaults Swift wrapper library.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -21,12 +21,12 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                        DESC
 
-  s.homepage         = 'https://github.com/susan.se3p@gmail.com/UserDefaultsProxy'
+  s.homepage         = 'https://github.com/susan335/UserDefaultsProxy'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { 'susan.se3p@gmail.com' => 'susan.se3p@gmail.com' }
-  s.source           = { :git => 'https://github.com/susan.se3p@gmail.com/UserDefaultsProxy.git', :tag => s.version.to_s }
-  # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
+  s.author           = { 'watanave' => 'susan.se3p@gmail.com' }
+  s.source           = { :git => 'https://github.com/susan335/UserDefaultsProxy.git', :tag => s.version.to_s }
+  s.social_media_url = 'https://twitter.com/Susan_jacko'
 
   s.ios.deployment_target = '8.0'
 
