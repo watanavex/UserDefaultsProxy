@@ -1,0 +1,16 @@
+PODS:
+  - UserDefaultsProxy (0.1.0)
+
+DEPENDENCIES:
+  - UserDefaultsProxy (from `../`)
+
+EXTERNAL SOURCES:
+  UserDefaultsProxy:
+    :path: ../
+
+SPEC CHECKSUMS:
+  UserDefaultsProxy: 40f19fbc441e7daa6846248c0ebd583ebfedf833
+
+PODFILE CHECKSUM: 962c5ec7988c37fe12d952b48d817670cd5f499c
+
+COCOAPODS: 1.2.0
