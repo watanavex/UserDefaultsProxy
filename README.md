@@ -22,7 +22,7 @@ pod "UserDefaultsProxy"
 
 ## Author
 
-susan.se3p@gmail.com, susan.se3p@gmail.com
+watanave, susan.se3p@gmail.com
 
 ## License
 
