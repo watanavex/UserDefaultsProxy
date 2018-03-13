@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UserDefaultsProxy'
-  s.version          = '0.2.1-beta'
+  s.version          = '0.3'
   s.summary          = 'UserDefaults Swift wrapper library.'
 
 # This description is used to generate tags and improve search results.
@@ -28,7 +28,7 @@ TODO: Add long description of the pod here.
   s.source           = { :git => 'https://github.com/susan335/UserDefaultsProxy.git', :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/Susan_jacko'
 
-  s.ios.deployment_target = '8.0'
+  s.ios.deployment_target = '10.0'
 
   s.source_files = 'UserDefaultsProxy/Classes/**/*'
   
