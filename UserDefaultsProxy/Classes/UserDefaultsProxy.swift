@@ -91,49 +91,57 @@ public class DuplicateKeyChecker {
     }
 }
 
+public class UserDefaultsContainer {
+    
+    public static var resolve: ()->UserDefaultsProtocol = {
+        return UserDefaults.standard
+    }
+    
+}
+
 open class UserDefalutsProxy<Type> {
     
-    public let userDefaults: UserDefaults
+    public let userDefaults: UserDefaultsProtocol
     public let key: String
     public let defaultValue: Type
     
-    public required init(userDefaults: UserDefaults = UserDefaults.standard, key: String, defaultValue: Type) {
+    public required init(key: String, defaultValue: Type) {
         DuplicateKeyChecker.checkProc(key: key)
         
-        self.userDefaults = userDefaults
+        self.userDefaults = UserDefaultsContainer.resolve()
         self.key = key
         self.defaultValue = defaultValue
     }
     
     open var value: Type {
         get {
-            return self.userDefaults.object(forKey: self.key) as? Type ?? self.defaultValue
+            return self.userDefaults.getValue(self.key) as? Type ?? self.defaultValue
         }
         set {
-            self.userDefaults.set(newValue, forKey: self.key)
+            self.userDefaults.setValue(newValue, key: self.key)
         }
     }
 }
 
 open class UserDefalutsOptionalProxy<Type> {
     
-    public let userDefaults: UserDefaults
+    public let userDefaults: UserDefaultsProtocol
     public let key: String
     
-    public required init(userDefaults: UserDefaults = UserDefaults.standard, key: String) {
+    public required init(key: String) {
         DuplicateKeyChecker.checkProc(key: key)
         
-        self.userDefaults = userDefaults
+        self.userDefaults = UserDefaultsContainer.resolve()
         self.key = key
     }
     
     open var value: Type? {
         get {
-            return self.userDefaults.object(forKey: self.key) as? Type
+            return self.userDefaults.getValue(self.key) as? Type
         }
         set {
             if let newValue = newValue {
-                self.userDefaults.set(newValue, forKey: self.key)
+                self.userDefaults.setValue(newValue, key: self.key)
             }
             else {
                 self.remove()
@@ -141,39 +149,39 @@ open class UserDefalutsOptionalProxy<Type> {
         }
     }
     open func remove() {
-        self.userDefaults.removeObject(forKey: self.key)
+        self.userDefaults.removeValue(key: self.key)
     }
 }
 
 public class UserDefalutsURLProxy : UserDefalutsProxy<URL> {
-    
-    public required init(userDefaults: UserDefaults = UserDefaults.standard, key: String, defaultValue: URL) {
-        super.init(userDefaults: userDefaults, key: key, defaultValue: defaultValue)
+
+    public required init(key: String, defaultValue: URL) {
+        super.init(key: key, defaultValue: defaultValue)
     }
-    
+
     public override var value: URL {
         get {
-            return self.userDefaults.url(forKey: self.key) ?? self.defaultValue
+            return self.userDefaults.getUrl(self.key) ?? self.defaultValue
         }
         set {
-            self.userDefaults.set(newValue, forKey: self.key)
+            self.userDefaults.setUrl(newValue, key: self.key)
         }
     }
 }
 
 public class UserDefalutsURLOptProxy : UserDefalutsOptionalProxy<URL> {
-    
-    public required init(userDefaults: UserDefaults = UserDefaults.standard, key: String) {
-        super.init(userDefaults: userDefaults, key: key)
+
+    public required init(key: String) {
+        super.init(key: key)
     }
-    
+
     public override var value: URL? {
         get {
-            return self.userDefaults.url(forKey: self.key)
+            return self.userDefaults.getUrl(self.key)
         }
         set {
             if let newValue = newValue {
-                self.userDefaults.set(newValue, forKey: self.key)
+                self.userDefaults.setUrl(newValue, key: self.key)
             }
             else {
                 self.remove()
@@ -200,18 +208,19 @@ public extension UserDefaultsConvertibleEnumType {
 
 public class UserDefalutsEnumProxy<Type>: UserDefalutsProxy<Type> where Type: RawRepresentable {
     
-    public required init(userDefaults: UserDefaults = UserDefaults.standard, key: String, defaultValue: Type) {
-        super.init(userDefaults: userDefaults, key: key, defaultValue: defaultValue)
+    public required init(key: String, defaultValue: Type) {
+        super.init(key: key, defaultValue: defaultValue)
     }
     
     public override var value: Type {
         get {
-            guard let rawValue = self.userDefaults.object(forKey: self.key) as? Type.RawValue else { return self.defaultValue }
+            
+            guard let rawValue = self.userDefaults.getValue(self.key) as? Type.RawValue else { return self.defaultValue }
             return Type.init(rawValue: rawValue) ?? self.defaultValue
         }
         set {
             let rawValue = newValue.rawValue
-            self.userDefaults.set(rawValue, forKey: self.key)
+            self.userDefaults.setValue(rawValue, key: self.key)
         }
     }
 }
