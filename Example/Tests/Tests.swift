@@ -4,9 +4,19 @@ import UserDefaultsProxy
 
 class Tests: XCTestCase {
     
+    static let mock = UserDefaultsMock()
+    
+    static var __once: () = {
+        DuplicateKeyChecker.isCheckDuplicateKey = true
+        
+        UserDefaultsContainer.resolve = {
+            return mock
+        }
+    }()
+    
     override func setUp() {
         super.setUp()
-        DuplicateKeyChecker.isCheckDuplicateKey = true
+        _ = Tests.__once
     }
     
     override func tearDown() {
@@ -22,7 +32,7 @@ class Tests: XCTestCase {
         proxy.value = val2
         XCTAssert(proxy.value == val2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == val1)
     }
     func testURLOpt() {
@@ -46,7 +56,7 @@ class Tests: XCTestCase {
         proxy.value = val2
         XCTAssert(proxy.value == val2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == val1)
     }
     func testIntOpt() {
@@ -69,7 +79,7 @@ class Tests: XCTestCase {
         proxy.value = arr2
         XCTAssert(proxy.value == arr2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == arr1)
     }
     func testIntArrayOpt() {
@@ -93,7 +103,7 @@ class Tests: XCTestCase {
         proxy.value = val2
         XCTAssert(proxy.value == val2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == val1)
     }
     func testStringOpt() {
@@ -116,7 +126,7 @@ class Tests: XCTestCase {
         proxy.value = arr2
         XCTAssert(proxy.value == arr2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == arr1)
     }
     func testStringArrayOpt() {
@@ -140,7 +150,7 @@ class Tests: XCTestCase {
         proxy.value = val2
         XCTAssert(proxy.value == val2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == val1)
     }
     func testDataOpt() {
@@ -166,7 +176,7 @@ class Tests: XCTestCase {
         proxy.value = arr2
         XCTAssert(proxy.value == arr2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == arr1)
     }
     func testDataArrayOpt() {
@@ -193,7 +203,7 @@ class Tests: XCTestCase {
         proxy.value = val2
         XCTAssert(proxy.value == val2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == val1)
     }
     func testBoolOpt() {
@@ -216,7 +226,7 @@ class Tests: XCTestCase {
         proxy.value = arr2
         XCTAssert(proxy.value == arr2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == arr1)
     }
     func testBoolArrayOpt() {
@@ -240,7 +250,7 @@ class Tests: XCTestCase {
         proxy.value = val2
         XCTAssert(proxy.value == val2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == val1)
     }
     func testFloatOpt() {
@@ -263,7 +273,7 @@ class Tests: XCTestCase {
         proxy.value = arr2
         XCTAssert(proxy.value == arr2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == arr1)
     }
     func testFloatArrayOpt() {
@@ -287,7 +297,7 @@ class Tests: XCTestCase {
         proxy.value = val2
         XCTAssert(proxy.value == val2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == val1)
     }
     func testDoubleOpt() {
@@ -310,7 +320,7 @@ class Tests: XCTestCase {
         proxy.value = arr2
         XCTAssert(proxy.value == arr2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == arr1)
     }
     func testDoubleArrayOpt() {
@@ -334,7 +344,7 @@ class Tests: XCTestCase {
         proxy.value = val2
         XCTAssert(proxy.value == val2)
         
-        proxy.userDefaults.removeObject(forKey: proxy.key)
+        proxy.userDefaults.removeValue(key: proxy.key)
         XCTAssert(proxy.value == val1)
     }
     func testDateOpt() {
@@ -365,7 +375,7 @@ class Tests: XCTestCase {
         TestEnum.current = .c2
         XCTAssert(TestEnum.current == .c2)
         
-        Tests.userDefaultTestEnum.userDefaults.removeObject(forKey: Tests.userDefaultTestEnum.key)
+        Tests.userDefaultTestEnum.userDefaults.removeValue(key: TestEnum.userDefalutsProxy.key)
     }
     
     func testPerformanceExample() {
