@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'UserDefaultsProxy'
-  s.version          = '0.3'
+  s.version          = '0.3.0'
   s.summary          = 'UserDefaults Swift wrapper library.'
 
 # This description is used to generate tags and improve search results.
@@ -31,7 +31,7 @@ TODO: Add long description of the pod here.
   s.ios.deployment_target = '10.0'
 
   s.source_files = 'UserDefaultsProxy/Classes/**/*'
-  
+
   # s.resource_bundles = {
   #   'UserDefaultsProxy' => ['UserDefaultsProxy/Assets/*.png']
   # }
